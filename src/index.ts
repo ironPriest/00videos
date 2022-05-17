@@ -26,10 +26,12 @@ app.get('/videos', (req: Request, res: Response ) => {
 })
 
 app.get('/videos/:videoId', (req: Request, res: Response) => {
-    const id = +req.params.videoId;
-    // FIND VIDEO AND RETURN IT
-    //
-    // IF VIDEO IS NOW EXISTS THEN RETURN 404 CODE
+    let video = videos.find(p => p.id === +req.params.videoId)
+    if (video) {
+        res.send(video)
+    } else {
+        res.send(404)
+    }
 })
 
 app.post('/videos', (req: Request, res: Response) => {
