@@ -44,6 +44,16 @@ app.post('/videos', (req: Request, res: Response) => {
     res.status(201).send(newVideo)
 })
 
+app.put('/videos/:videoId', (req: Request, res: Response) => {
+    let video = videos.find(p => p.id === +req.params.id)
+    if (video) {
+        video.title = req.body.title
+        res.send(video)
+    } else {
+        res.send(404)
+    }
+})
+
 app.delete('/videos/:id',(req: Request, res: Response)=>{
     // put your code here
     videos = videos.filter((v) => v.id !== +req.params.id)
