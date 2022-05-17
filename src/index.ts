@@ -56,8 +56,17 @@ app.post('/videos', (req: Request, res: Response) => {
 app.put('/videos/:videoId', (req: Request, res: Response) => {
     let video = videos.find(p => p.id === +req.params.videoId)
     if (video) {
-        video.title = req.body.title
-        res.send(204)
+        if (req.body.title === null) {
+            res.status(400).json(
+                {
+                    "errorsMessages": [{"message": "cant_be_empty", "field": "title"}],
+                    "resultCode": 999
+                }
+            )
+        } else {
+            video.title = req.body.title
+            res.send(204)
+        }
     } else {
         res.send(404)
     }
