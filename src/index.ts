@@ -35,7 +35,7 @@ app.get('/videos/:videoId', (req: Request, res: Response) => {
 })
 
 app.post('/videos', (req: Request, res: Response) => {
-    if (req.body.title === "") {
+    if (req.body.title === null) {
         res.send(400)
     } else {
         const newVideo = {
