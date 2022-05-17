@@ -1,10 +1,13 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+
+// create expresss app
 const app = express()
 const port = process.env.PORT || 3000
 app.use(cors())
-app.use(bodyParser.json())
+const parserMiddleware = bodyParser.json()
+app.use(parserMiddleware)
 
 let videos = [
     {id: 1, title: 'About JS - 01', author: 'it-incubator.eu'},
