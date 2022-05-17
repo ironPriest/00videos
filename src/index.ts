@@ -54,10 +54,14 @@ app.put('/videos/:videoId', (req: Request, res: Response) => {
     }
 })
 
-app.delete('/videos/:id',(req: Request, res: Response)=>{
-    // put your code here
-    videos = videos.filter((v) => v.id !== +req.params.id)
-    res.send(204)
+app.delete('/videos/:videoId',(req: Request, res: Response)=>{
+    let video = videos.find(p => p.id === +req.params.videoId)
+    if (video) {
+        videos = videos.filter((v) => v.id !== +req.params.videoId)
+        res.send(204)
+    } else {
+        res.send(404)
+    }
 })
 
 
