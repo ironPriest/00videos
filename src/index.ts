@@ -48,7 +48,7 @@ app.put('/videos/:videoId', (req: Request, res: Response) => {
     let video = videos.find(p => p.id === +req.params.videoId)
     if (video) {
         video.title = req.body.title
-        res.send(video)
+        res.send(204)
     } else {
         res.send(404)
     }
