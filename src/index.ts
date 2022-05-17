@@ -35,13 +35,17 @@ app.get('/videos/:videoId', (req: Request, res: Response) => {
 })
 
 app.post('/videos', (req: Request, res: Response) => {
-    const newVideo = {
-        id: +(new Date()),
-        title: req.body.title,
-        author: 'it-incubator.eu'
+    if (req.body.title === "") {
+        res.send(400)
+    } else {
+        const newVideo = {
+            id: +(new Date()),
+            title: req.body.title,
+            author: 'it-incubator.eu'
+        }
+        videos.push(newVideo)
+        res.status(201).send(newVideo)
     }
-    videos.push(newVideo)
-    res.status(201).send(newVideo)
 })
 
 app.put('/videos/:videoId', (req: Request, res: Response) => {
