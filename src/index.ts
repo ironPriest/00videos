@@ -36,8 +36,13 @@ app.get('/videos/:videoId', (req: Request, res: Response) => {
 
 app.post('/videos', (req: Request, res: Response) => {
     if (req.body.title === null) {
-        res.send(400)
-    } else {
+        let dataToSend = {
+            errorsMessages: [{ message: "can't post empty data", field: "title" }],
+            resultCode: 666
+        }
+        res.status(400).send(dataToSend)
+
+        } else {
         const newVideo = {
             id: +(new Date()),
             title: req.body.title,
