@@ -57,14 +57,16 @@ app.post('/videos', (req: Request, res: Response) => {
 
 app.put('/videos/:videoId', (req: Request, res: Response) => {
     let video = videos.find(p => p.id === +req.params.videoId)
+    let title = req.body.title
     if (video) {
-        if (req.body.title === null) {
-            res.status(400).json(
-                {
-                    "errorsMessages": [{"message": "cant_be_empty", "field": "title"}],
-                    "resultCode": 999
-                }
-            )
+        if (!title || typeof title !== 'string' || !title.trim()) {
+            res.status(400).send({
+                    errorsMessages: [{
+                        "message": "cant_be_empty",
+                        "field": "title"}],
+                    resultCode: 2
+                })
+            return
         } else {
             video.title = req.body.title
             res.send(204)
