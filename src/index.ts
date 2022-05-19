@@ -64,7 +64,7 @@ app.put('/videos/:videoId', (req: Request, res: Response) => {
                     errorsMessages: [{
                         "message": "cant_be_empty",
                         "field": "title"}],
-                    resultCode: 2
+                    resultCode: 1
                 })
             return
         } else {
