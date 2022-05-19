@@ -35,13 +35,15 @@ app.get('/videos/:videoId', (req: Request, res: Response) => {
 })
 
 app.post('/videos', (req: Request, res: Response) => {
-    if (req.body.title === null) {
-        res.status(400).json(
-            {
-                "errorsMessages": [{"message": "cant_be_empty", "field": "title"}],
-                "resultCode": 666
-            }
-        )
+    let title = req.body.title
+    if (!title || typeof title !== 'string' || !title.trim()) {
+        res.status(400).send({
+                errorsMessages: [{
+                    "message": "cant_be_empty",
+                    "field": "title"}],
+                resultCode: 1
+            })
+        return
         } else {
         const newVideo = {
             id: +(new Date()),
