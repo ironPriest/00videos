@@ -36,7 +36,7 @@ app.get('/videos/:videoId', (req: Request, res: Response) => {
 
 app.post('/videos', (req: Request, res: Response) => {
     let title = req.body.title
-    if (!title || typeof title !== 'string' || !title.trim()) {
+    if (!title || typeof title !== 'string' || !title.trim() || title.length > 40) {
         res.status(400).send({
                 errorsMessages: [{
                     "message": "cant_be_empty",
@@ -59,7 +59,7 @@ app.put('/videos/:videoId', (req: Request, res: Response) => {
     let video = videos.find(p => p.id === +req.params.videoId)
     let title = req.body.title
     if (video) {
-        if (!title || typeof title !== 'string' || !title.trim()) {
+        if (!title || typeof title !== 'string' || !title.trim() || title.length > 40) {
             res.status(400).send({
                     errorsMessages: [{
                         "message": "cant_be_empty",
