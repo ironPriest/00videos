@@ -18,7 +18,17 @@ let videos = [
 ]
 
 app.get('/', (req: Request, res: Response ) => {
-    res.send('Hello: World!')
+
+    /*let start = performance.now()
+    while(performance.now() - start < 10000) {
+        console.log(performance.now() - start)
+    }*/
+
+    setInterval(() => {
+        res.send('Hello world!')
+    }, 10000)
+
+    //res.send('Hello: World!')
 })
 
 app.get('/videos', (req: Request, res: Response ) => {
